@@ -4,8 +4,8 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
-
+import GoogleProvider from "next-auth/providers/google";
+import TwitterProvider from "next-auth/providers/twitter";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 
@@ -47,10 +47,14 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET
     }),
+    TwitterProvider({
+      clientId: env.TWITTER_ID,
+      clientSecret: env.TWITTER_SECRET,
+    })
     /**
      * ...add more providers here.
      *
